@@ -1,34 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dynamic Quote Generator</title>
-  </head>
-  <body>
-    <h1>Dynamic Quote Generator</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dynamic Quote Generator</title>
 
-    <select id="categoryFilter"></select>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #quoteDisplay { margin: 15px 0; font-size: 1.2em; }
+    input, select, button { display: block; margin: 5px 0; }
+  </style>
+</head>
+<body>
 
-    <div id="quoteDisplay">Click the button to see a quote</div>
-    <button id="newQuote">Show New Quote</button>
+  <h1>Dynamic Quote Generator</h1>
 
-    <h2>Add a New Quote</h2>
-    <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
-    <input
-      id="newQuoteCategory"
-      type="text"
-      placeholder="Enter quote category"
-    />
-    <button onclick="addQuote()">Add Quote</button>
+  <!-- Category Filter -->
+  <select id="categoryFilter"></select>
 
-    <h2>Import / Export Quotes</h2>
-    <button onclick="exportToJson()">Export Quotes</button>
-    <input type="file" accept=".json" onchange="importFromJsonFile(event)" />
+  <!-- Quote Display -->
+  <div id="quoteDisplay">Click the button to see a quote</div>
+  <button id="newQuote">Show New Quote</button>
 
-    <h2>Sync Status</h2>
-    <div id="syncStatus">Not synced yet</div>
+  <!-- Add Quote -->
+  <h2>Add a New Quote</h2>
+  <input id="newQuoteText" type="text" placeholder="Enter a new quote">
+  <input id="newQuoteCategory" type="text" placeholder="Enter quote category">
+  <button onclick="addQuote()">Add Quote</button>
 
-    <script src="script.js"></script>
-  </body>
+  <!-- Import / Export -->
+  <h2>Import / Export Quotes</h2>
+  <button onclick="exportToJson()">Export Quotes</button>
+  <input type="file" accept=".json" onchange="importFromJsonFile(event)">
+
+  <!-- Sync Status -->
+  <h2>Sync Status</h2>
+  <div id="syncStatus">Not synced yet</div>
+
+  <script src="script.js"></script>
+</body>
 </html>
+
