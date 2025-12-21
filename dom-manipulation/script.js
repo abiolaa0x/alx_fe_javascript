@@ -153,7 +153,7 @@ async function syncQuotes() {
     populateCategories();
 
     syncStatus.textContent =
-      "Quotes synced with server. Server data took precedence.";
+      "Quotes synced with server.";
 
     await postQuotesToServer(quotes);
   } catch (error) {
