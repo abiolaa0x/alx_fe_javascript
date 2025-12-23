@@ -3,7 +3,7 @@
 let quotes = JSON.parse(localStorage.getItem("quotes")) || [
   { text: "Learning never exhausts the mind.", category: "Education" },
   { text: "Simplicity is the soul of efficiency.", category: "Programming" },
-  { text: "Knowledge is power.", category: "Motivation" }
+  { text: "Knowledge is power.", category: "Motivation" },
 ];
 
 let currentCategory = localStorage.getItem("selectedCategory") || "all";
@@ -26,14 +26,15 @@ function showRandomQuote() {
   const filteredQuotes =
     currentCategory === "all"
       ? quotes
-      : quotes.filter(q => q.category === currentCategory);
+      : quotes.filter((q) => q.category === currentCategory);
 
   if (filteredQuotes.length === 0) {
     quoteDisplay.textContent = "No quotes in this category.";
     return;
   }
 
-  const random = filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)];
+  const random =
+    filteredQuotes[Math.floor(Math.random() * filteredQuotes.length)];
   quoteDisplay.textContent = `"${random.text}" — ${random.category}`;
 
   sessionStorage.setItem("lastViewedQuote", random.text);
@@ -63,10 +64,10 @@ function addQuote() {
 /* -------------------- CATEGORY FILTER -------------------- */
 
 function populateCategories() {
-  const categories = ["all", ...new Set(quotes.map(q => q.category))];
+  const categories = ["all", ...new Set(quotes.map((q) => q.category))];
 
   categoryFilter.innerHTML = "";
-  categories.forEach(cat => {
+  categories.forEach((cat) => {
     const option = document.createElement("option");
     option.value = cat;
     option.textContent = cat;
@@ -86,10 +87,9 @@ categoryFilter.addEventListener("change", filterQuotes);
 /* -------------------- JSON IMPORT / EXPORT -------------------- */
 
 function exportToJson() {
-  const blob = new Blob(
-    [JSON.stringify(quotes, null, 2)],
-    { type: "application/json" }
-  );
+  const blob = new Blob([JSON.stringify(quotes, null, 2)], {
+    type: "application/json",
+  });
 
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
@@ -102,7 +102,7 @@ function exportToJson() {
 
 function importFromJsonFile(event) {
   const reader = new FileReader();
-  reader.onload = e => {
+  reader.onload = (e) => {
     const importedQuotes = JSON.parse(e.target.result);
     quotes.push(...importedQuotes);
     saveQuotes();
@@ -123,9 +123,9 @@ async function fetchQuotesFromServer() {
   const response = await fetch(SERVER_URL + "?_limit=3");
   const data = await response.json();
 
-  return data.map(post => ({
+  return data.map((post) => ({
     text: post.title,
-    category: "Server"
+    category: "Server",
   }));
 }
 
@@ -136,7 +136,7 @@ async function postQuotesToServer(quotesToPost) {
   await fetch(SERVER_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(quotesToPost)
+    body: JSON.stringify(quotesToPost),
   });
 }
 
@@ -152,8 +152,7 @@ async function syncQuotes() {
     saveQuotes();
     populateCategories();
 
-    syncStatus.textContent =
-      "Quotes synced with server!";
+    syncStatus.textContent = "Quotes synced with server!";
 
     await postQuotesToServer(quotes);
   } catch (error) {
